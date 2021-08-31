@@ -13,7 +13,7 @@ function refreshMovies (){
             var html = "";
             movies.forEach(movie => {
                 html+= `<div class="card text-center col-4">${movie.title} 
-                <div class="btn btn-danger delete-btn">X</div>
+                <div class="delete-btn" id=${movie.id}></div>
                 </div>`;
             });
             //change html to movies
@@ -95,7 +95,11 @@ $("#edit_submit_button").click(e => {
         .catch(console.error);
 
 });
-
+$(".delete-btn").mousedown(()=>{
+    console.log("button clicked");
+    let deleteMovieId = $('.delete-btn').data("id")
+    console.log(deleteMovieId);
+});
 //initialization
 refreshMovies();
 
