@@ -3,6 +3,7 @@ var moviesGlobal = {};
 const url = "https://obtainable-scrawny-cactus.glitch.me/movies";
 //gathers all movie objects and displays on html
 function refreshMovies (){
+    $(".insert-movie-cards").html("loading");
     fetch(url).then( response => {
         response.json().then(movies => {
             //create global movies object
@@ -11,10 +12,12 @@ function refreshMovies (){
             //clear html, if any
             var html = "";
             movies.forEach(movie => {
-                html+= movie.title
+                html+= `<div class="card text-center col-4">${movie.title} 
+                <div class="btn btn-danger delete-btn">X</div>
+                </div>`;
             });
             //change html to movies
-            $(".loading").html(html)
+            $(".insert-movie-cards").html(html);
 
             //refresh list of movies in dropdown
             var editMoviesDropdown = "";
