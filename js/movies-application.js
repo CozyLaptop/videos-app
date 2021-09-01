@@ -125,11 +125,23 @@ $("#edit_submit_button").click(e => {
 
 });
 //on click of red button, delete movie
-$(document).on("click", ".delete-btn",((e)=>{
-    console.log("button clicked");
-    let deleteMovieId = (e.target.attributes.id.value);
-    console.log(deleteMovieId);
-}));
+// $(document).on("click", ".delete-btn",((e)=> {
+//     console.log("button clicked");
+//     let deleteMovieId = (e.target.attributes.id.value);
+//     console.log(deleteMovieId);
+//     const options = {
+//         method: 'DELETE',
+//         headers: {
+//             'Content-Type': 'application/json',
+//         },
+//         // body: JSON.stringify(deleteMovieId),
+//     };
+//     //send data to server, if successful, refresh movies
+//     fetch(`${url}/${deleteMovieId}`, options)
+//         .then(() => refreshMovies())
+//         .catch(error => console.error(error));
+//
+// }));
 //initialization
 refreshMovies();
 
