@@ -6,40 +6,40 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <link rel="stylesheet" href="css/custom.css">
 </head>
-<body class="container-fluid">
-
-
+<body class="container">
 <div class="row insert-movie-cards">
-    <div class="card text-center col-4">test</div>
-
 </div>
-<h2>Add a Movie</h2>
-<!--<form action="/action_page.php">-->
-<form>
-    <label for="movie_name">Movie name:</label><br>
-    <input type="text" id="movie_name" name="movie_name" value="Movie Name"><br>
-    <label for="rating">Rating (1-5): </label><br>
-    <input type="text" id="rating" name="rating" value="1-5"><br><br>
-    <input type="submit" id="submit_button" value="Submit">
-</form>
-<h2>Edit a movie</h2>
-
-<label for="movies_dropdown">Choose a movie to edit:</label>
 <br>
-<select name="movies_dropdown" id="movies_dropdown">
-    <!--Insert movies from JS-->
-</select>
-<form>
-    <label for="edit_movie_name">Edit movie name:</label><br>
-    <input type="text" id="edit_movie_name" name="edit_movie_name" value=""><br>
-    <label for="edit_rating">New Rating (1-5): </label><br>
-    <input type="text" id="edit_rating" name="edit_rating" value=""><br><br>
-    <input type="submit" id="edit_submit_button" value="Submit">
-</form>
+<div class="row">
+    <div class="col-4">
+        <h2>Add a Movie</h2>
+        <form>
+            <label for="movie_name">Movie name:</label><br>
+            <input type="text" id="movie_name" name="movie_name" value="Movie Name"><br>
+            <label for="rating">Rating (1-5): </label><br>
+            <input type="text" id="rating" name="rating" value="1-5"><br><br>
+            <input type="submit" id="submit_button" value="Submit">
+        </form>
+    </div>
+    <div class="col-4">
+        <h2>Edit a movie</h2>
 
+        <label for="movies_dropdown">Choose a movie to edit:</label>
+        <br>
+        <select name="movies_dropdown" id="movies_dropdown">
+            <!--Insert movies from JS-->
+        </select>
+        <form>
+            <label for="edit_movie_name">Edit movie name:</label><br>
+            <input type="text" id="edit_movie_name" name="edit_movie_name" value=""><br>
+            <label for="edit_rating">New Rating (1-5): </label><br>
+            <input type="text" id="edit_rating" name="edit_rating" value=""><br><br>
+            <input type="submit" id="edit_submit_button" value="Submit">
+        </form>
+    </div>
+</div>
+<script src="js/keys.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="js/movies-application.js"></script>
 </body>
-
-
 </html>

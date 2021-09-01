@@ -1,24 +1,53 @@
 "use strict";
 var moviesGlobal = {};
+var starImage = `<img src="images/star.png">`
 const url = "https://obtainable-scrawny-cactus.glitch.me/movies";
+
 //gathers all movie objects and displays on html
 function refreshMovies (){
-    $(".insert-movie-cards").html("loading");
+    $(".insert-movie-cards").html("Loading");
     fetch(url).then( response => {
         response.json().then(movies => {
+            //remove loading screen
+            $(".insert-movie-cards").html("");
             //create global movies object
             moviesGlobal = movies;
             console.log(moviesGlobal);
-            //clear html, if any
             var html = "";
+            var movieStars = "";
+            var posterPath = "";
+            var fullPosterPath = "";
             movies.forEach(movie => {
-                html+= `<div class="card text-center col-4">${movie.title} 
-                <div class="delete-btn" id=${movie.id}></div>
-                </div>`;
+                fetch(`https://api.themoviedb.org/3/search/movie?api_key=${MOVIES_APP_API_KEY}&query=${movie.title}`).then(response => {
+                    response.json().then(movies => {
+                        movieStars = "";
+                        //add stars to movie
+                        for (var i = 0; i < movie.rating; i++) {
+                            //if 5 or more, break at 5
+                            if (i >= 5){
+                                break;
+                            }
+                            movieStars += `<img src="images/star.png" style="height: 15px; width: 15px">`
+                        }
+                        //if cannot access poster, posts a generic one
+                        try {
+                            posterPath = movies.results[0].poster_path;
+                            fullPosterPath = `<img  class="mb-auto" src="https://image.tmdb.org/t/p/w500${posterPath}">`;
+                        }
+                        catch(err) {
+                            fullPosterPath = `<img class="mb-auto" src="images/image-reel.png">`;
+                        }
+                        html = `<div class="text-center mb-3 col-6 col-md-4 col-lg-3"> 
+                        <div class="card btn-outline-dark">
+                        ${fullPosterPath}
+                        ${movie.title} 
+                        <div class="stars">${movieStars}</div>
+                        <div class="delete-btn" id="${movie.id}"></div>
+                        </div></div>`
+                        $(".insert-movie-cards").append(html);
+                    }).catch(console.error);
+                });
             });
-            //change html to movies
-            $(".insert-movie-cards").html(html);
-
             //refresh list of movies in dropdown
             var editMoviesDropdown = "";
             moviesGlobal.forEach(movie => {
@@ -26,7 +55,7 @@ function refreshMovies (){
             });
             $("#movies_dropdown").html(editMoviesDropdown);
         });
-    });
+    }).catch(console.error);
 }
 //on submit, create movie and post to server
 $("#submit_button").click(e => {
@@ -57,7 +86,6 @@ $("#movies_dropdown").change(()=>{
     //grabs text of option selection
     var originalMovieName = $('#movies_dropdown option:selected').text();
     var selectedMovieId = $('#movies_dropdown option:selected').val();
-    console.log($('#movies_dropdown option:selected').val())
     //changes form input text to selected option
     $("#edit_movie_name").val(originalMovieName);
     $("#edit_rating").val(findRating(selectedMovieId));
@@ -76,6 +104,7 @@ function findRating(movieId){
         }
     }
 }
+
 $("#edit_submit_button").click(e => {
     e.preventDefault();
     const movieObj = {
@@ -95,11 +124,12 @@ $("#edit_submit_button").click(e => {
         .catch(console.error);
 
 });
-$(".delete-btn").mousedown(()=>{
+//on click of red button, delete movie
+$(document).on("click", ".delete-btn",((e)=>{
     console.log("button clicked");
-    let deleteMovieId = $('.delete-btn').data("id")
+    let deleteMovieId = (e.target.attributes.id.value);
     console.log(deleteMovieId);
-});
+}));
 //initialization
 refreshMovies();
 
