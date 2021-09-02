@@ -1,3 +1,6 @@
+body{
+    background:no-repeat fixed center url("../images/cinema.png");
+}
 .delete-btn{
     height: 8px;
     width: 8px;
@@ -11,12 +14,24 @@
     position: absolute;
     left: 10px;
 }
+.edit-card{
+    height:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-shadow: 2px 2px 5px #000000;
+}
 .card{
     border-radius: 10px;
     box-shadow: 5px 5px 10px black;
     overflow: hidden;
     animation: .5s slide-up;
     margin-top: 0%;
+}
+.overview{
+    display: none;
+}
+h2{
 }
 @keyframes slide-up {
     from {
